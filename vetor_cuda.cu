@@ -10,8 +10,10 @@ __global__ void vector_add(int *a, int *b, int *c){
     Esse é o paralelismo de uma instrução sendo executada por todo mundo (SIMD). 
     Com essas informações ele consegue se localizar dentro da arquitetura da GPU*/
     int index = blockIdx.x * blockDim.x + threadIdx.x;
-    c[index] = a[index] + b[index];
-
+    if(index < N){
+        c[index] = a[index] + b[index];
+    }
+    
 }
 
 #define N (2048*2048)
